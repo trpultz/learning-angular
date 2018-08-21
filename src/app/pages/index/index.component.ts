@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiDataService } from '../../api-data.service';
+import { Observable } from 'rxjs';
+/* Observable will hold data. */
 
 @Component({
   selector: 'app-index',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  users$: Object;
+
+  constructor(private data: ApiDataService) { }
 
   ngOnInit() {
+    this.data.getData().subscribe(
+      data => this.users$ = data
+    )
   }
 
 }
